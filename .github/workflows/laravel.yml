@@ -12,17 +12,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
-      with:
-        php-version: '7.4'
-    
-    - uses: actions/checkout@v4
-
-    - name: Deploy to server via ssh
-      uses: appleboy/ssh-action@v1.0.3
+    - name: Checkout the code
+      uses: actions/checkout@v4
+      
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+  
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ secrets.SSH_IP_ADDRESS }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
-        port : ''
-        script: "cd ${{ secrets.SSH_PROJECT_PATH }} && sh ./deploy.sh"
+        script: |
+          cd ${{ secrets.SSH_PROJECT_PATH }}
+          sudo chmod 777 -R ${{ secrets.SSH_PROJECT_PATH }}/storage/
+          sudo chmod 777 -R ${{ secrets.SSH_PROJECT_PATH }}/bootstrap/
+    
+  
