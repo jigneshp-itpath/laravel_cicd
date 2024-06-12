@@ -37,6 +37,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
             cd $SSH_PROJECT_PATH
-            sudo chmod 777 -R $SSH_PROJECT_PATH/storage/
-            sudo chmod 777 -R $SSH_PROJECT_PATH/bootstrap/
+            chmod 777 -R $SSH_PROJECT_PATH/storage/
+            chmod 777 -R $SSH_PROJECT_PATH/bootstrap/
   
