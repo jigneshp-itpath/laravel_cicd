@@ -24,7 +24,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
+        TARGET: /var/www/html/php74-web/laravelcicd.project-demo.info
         SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
 
     - name: executing remote ssh commands using password
@@ -36,7 +36,7 @@ jobs:
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            cd $SSH_PROJECT_PATH
-            chmod 777 -R $SSH_PROJECT_PATH/storage/
-            chmod 777 -R $SSH_PROJECT_PATH/bootstrap/
+            cd /var/www/html/php74-web/laravelcicd.project-demo.info
+            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
+            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
   
