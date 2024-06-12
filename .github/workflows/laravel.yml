@@ -38,6 +38,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
             cd /var/www/html/php74-web/laravelcicd.project-demo.info
+            nano index.html
             # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
             # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
   
