@@ -13,7 +13,16 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
-      
+    
+    - name: Deploy to my EC2 instance
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
+        SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
+
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.10
       with:
