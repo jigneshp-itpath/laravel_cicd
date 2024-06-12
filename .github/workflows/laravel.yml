@@ -24,20 +24,19 @@ jobs:
         REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: "/var/www/html/php74-web/laravelcicd.project-demo.info/"
-        SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
+        SOURCE: "build/"
+        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
 
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_IP_ADDRESS }}
-        username: ${{ secrets.SSH_USERNAME }}
-        # password: ${{ secrets.SSH_PASSWORD }}
-        port : ${{ secrets.SSH_PORT }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-            cd /var/www/html/php74-web/laravelcicd.project-demo.info
-            mkdir test
-            # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
-            # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
+    # - name: executing remote ssh commands using password
+    #   uses: appleboy/ssh-action@v1.0.3
+    #   with:
+    #     host: ${{ secrets.SSH_IP_ADDRESS }}
+    #     username: ${{ secrets.SSH_USERNAME }}
+    #     # password: ${{ secrets.SSH_PASSWORD }}
+    #     port : ${{ secrets.SSH_PORT }}
+    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #     script: |
+    #         cd /var/www/html/php74-web/laravelcicd.project-demo.info
+    #         # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
+    #         # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
   
