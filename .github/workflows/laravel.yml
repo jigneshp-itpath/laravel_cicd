@@ -25,17 +25,5 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port : ${{ secrets.SSH_PORT }}
-        script: |
-          cd ${{ secrets.SSH_PROJECT_PATH }}
-          sudo chmod 777 -R ${{ secrets.SSH_PROJECT_PATH }}/storage/
-          sudo chmod 777 -R ${{ secrets.SSH_PROJECT_PATH }}/bootstrap/
-    
-    
-    # - name: Deploy to server via ssh
-    #   uses: appleboy/ssh-action@v1.0.3
-    #   with:
-    #     host: ${{ secrets.SSH_IP_ADDRESS }}
-    #     username: ${{ secrets.SSH_USERNAME }}
-    #     password: ${{ secrets.SSH_PASSWORD }}
-    #     port : ${{ secrets.SSH_PORT }}
-    #     script: "cd ${{ secrets.SSH_PROJECT_PATH }} && sh ./deploy.sh"
+        script: "cd ${{ secrets.SSH_PROJECT_PATH }} && sh deploy.sh"
+  
