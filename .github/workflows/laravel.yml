@@ -36,7 +36,6 @@ jobs:
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            cd /var/www/html/php74-web/laravelcicd.project-demo.info
-            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
-            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
+            cd ${{ secrets.SSH_PROJECT_PATH }}
+            sh ./deploy.sh
   

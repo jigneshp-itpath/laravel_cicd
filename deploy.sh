@@ -5,6 +5,9 @@ echo "Deploying application ..."
 
 # Enter maintenance mode
 (php artisan down --message 'The app is being (quickly!) updated. Please try again in a minute.') || true
+
+    cp server.php index.php
+
     # Update codebase
     git fetch origin main
     git reset --hard origin/main
@@ -18,11 +21,15 @@ echo "Deploying application ..."
     # Note: If you're using queue workers, this is the place to restart them.
     # ...
 
+    # permission set
+    chmod 777 -R storage/
+    chmod 777 -R bootstrap/
+
     # Clear cache
     php artisan optimize
 
     # Reload PHP to update opcache
-    # echo "" | sudo -S service php7.4-fpm reload
+    # echo "" | sudo -S service php7.4-fpm reload    
 # Exit maintenance mode
 php artisan up
 
