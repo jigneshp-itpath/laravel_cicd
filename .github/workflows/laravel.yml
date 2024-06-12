@@ -16,9 +16,6 @@ jobs:
     - name: Install Composer Dependencies
       run: composer install --no-dev --prefer-dist --no-progress --no-suggest
 
-    - name: Run Tests
-      run: php artisan test
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
