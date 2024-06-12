@@ -14,21 +14,15 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v4
 
-    - name: Install composer Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    
-    - name: Directory Permissions
-      run: chmod 755 -R storage bootstrap/cache
-
-    # - name: Deploy to ssh server
-    #   uses: easingthemes/ssh-deploy@v2.1.5
-    #   env:
-    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
-    #     REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-    #     REMOTE_PORT: ${{ secrets.SSH_PORT }}
-    #     TARGET: ${{ secrets.SSH_PROJECT_PATH }}
-    #     SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
+    - name: Deploy to ssh server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        REMOTE_PORT: ${{ secrets.SSH_PORT }}
+        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
+        SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.10
