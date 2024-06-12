@@ -17,6 +17,7 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
+
     - name: Deploy to ssh server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -26,16 +27,16 @@ jobs:
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
         TARGET: ${{ secrets.SSH_PROJECT_PATH }}
 
-    # - name: executing remote ssh commands using password
-    #   uses: appleboy/ssh-action@v1.0.3
-    #   with:
-    #     host: ${{ secrets.SSH_IP_ADDRESS }}
-    #     username: ${{ secrets.SSH_USERNAME }}
-    #     # password: ${{ secrets.SSH_PASSWORD }}
-    #     port : ${{ secrets.SSH_PORT }}
-    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     script: |
-    #         cd /var/www/html/php74-web/laravelcicd.project-demo.info
-    #         # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
-    #         # chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_IP_ADDRESS }}
+        username: ${{ secrets.SSH_USERNAME }}
+        # password: ${{ secrets.SSH_PASSWORD }}
+        port : ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+            cd /var/www/html/php74-web/laravelcicd.project-demo.info
+            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/storage/
+            chmod 777 -R /var/www/html/php74-web/laravelcicd.project-demo.info/bootstrap/
   
