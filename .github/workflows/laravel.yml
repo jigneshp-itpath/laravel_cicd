@@ -36,6 +36,7 @@ jobs:
             cd ${{ secrets.SSH_PROJECT_PATH }}
             composer install
             chmod 777 -R storage bootstrap
+            php artisan migrate --fresh
             php artisan optimize
             
   
