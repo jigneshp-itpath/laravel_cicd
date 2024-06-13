@@ -12,16 +12,7 @@ jobs:
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v4
-
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.x'
-    
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
+      uses: actions/checkout@main
 
     - name: Deploy to ssh server
       uses: easingthemes/ssh-deploy@v2.1.5
@@ -30,7 +21,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
+        TARGET: "/var/www/html/php74-web/laravelcicd.project-demo.info"
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
@@ -41,6 +32,6 @@ jobs:
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            cd ${{ secrets.SSH_PROJECT_PATH }}
+            cd /var/www/html/php74-web/laravelcicd.project-demo.info
             sh ./deploy.sh
   

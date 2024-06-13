@@ -6,9 +6,7 @@ echo "Deploying application ..."
 # Enter maintenance mode
 php artisan down
 
-echo "copy files start ..."
-cp server.php index.php
-echo "copy files end ..."
+# cp server.php index.php
 
 # Update codebase
 git fetch origin main
@@ -24,8 +22,7 @@ composer install --no-interaction --prefer-dist --optimize-autoloader
 # ...
 
 # Permission given
-chmod 777 -R storage/
-chmod 777 -R bootstrap/
+chmod 777 -R storage bootstrap
 
 # Clear cache
 php artisan optimize
