@@ -117,7 +117,7 @@
                             </svg>
 
                             <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor by jignesh
+                                Worked by Jignesh Prajapati
                             </a>
                         </div>
                     </div>
