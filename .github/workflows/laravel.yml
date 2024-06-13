@@ -14,9 +14,6 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@main
       
-    # - name: Install Dependencies
-    #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
     - name: Deploy to ssh server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -24,7 +21,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: /var/www/html/php74-web/laravelcicd.project-demo.info/
+        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
         SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
 
     - name: executing remote ssh commands using password
@@ -36,7 +33,7 @@ jobs:
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            cd /var/www/html/php74-web/laravelcicd.project-demo.info/
+            cd ${{ secrets.SSH_PROJECT_PATH }}
             composer install
             chmod 777 -R storage bootstrap
             php artisan optimize
