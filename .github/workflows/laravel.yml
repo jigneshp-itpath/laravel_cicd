@@ -14,14 +14,8 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@main
       
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-    # - name: Permission given
-    #   run: chmod 777 -R storage bootstrap
-
-    - name: Optimize applications
-      run: php artisan optimize      
+    # - name: Install Dependencies
+    #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
     - name: Deploy to ssh server
       uses: easingthemes/ssh-deploy@v2.1.5
@@ -43,7 +37,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
             cd /var/www/html/php74-web/laravelcicd.project-demo.info/
-            php artisan down
+            composer install
             chmod 777 -R storage bootstrap
-            php artisan up
+            php artisan optimize
+            
   
