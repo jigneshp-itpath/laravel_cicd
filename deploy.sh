@@ -6,14 +6,13 @@ echo "Deploying application ..."
 # Enter maintenance mode
 php artisan down
 
+# Install dependencies based on lock file
+composer install --no-interaction --prefer-dist --optimize-autoloader
 # cp server.php index.php
 
 # Update codebase
 git fetch origin main
 git reset --hard origin/main
-
-# Install dependencies based on lock file
-composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Migrate database
 # php artisan migrate --force

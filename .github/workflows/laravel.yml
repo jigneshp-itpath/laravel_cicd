@@ -21,7 +21,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: "/var/www/html/php74-web/laravelcicd.project-demo.info"
+        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
@@ -32,6 +32,6 @@ jobs:
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            cd /var/www/html/php74-web/laravelcicd.project-demo.info
+            cd ${{ secrets.SSH_PROJECT_PATH }}
             sh ./deploy.sh
   
