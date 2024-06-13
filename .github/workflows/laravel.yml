@@ -17,6 +17,11 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
+    - name: Permission given
+      run: chmod 777 -R storage bootstrap
+
+    
+
     - name: Deploy to ssh server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -25,6 +30,7 @@ jobs:
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: ${{ secrets.SSH_PORT }}
         TARGET: /var/www/html/php74-web/laravelcicd.project-demo.info/
+        SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
@@ -36,5 +42,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
             cd /var/www/html/php74-web/laravelcicd.project-demo.info/
-            sh ./deploy.sh
+            php artisan down
+            chmod 777 -R storage bootstrap
+            php artisan optimize
+            php artisan up
   
