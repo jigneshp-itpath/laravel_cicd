@@ -130,7 +130,7 @@
                             </svg>
 
                             <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Worked by Jignesh Prajapati
+                                Worked by Jignesh Prajapati - PTA - IT Path soulitions
                             </a>
                         </div>
                     </div>
