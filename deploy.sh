@@ -6,6 +6,8 @@ echo "Deploying application ..."
 # Enter maintenance mode
 php artisan down
 
+rm -R -F vendor
+
 # Install dependencies based on lock file
 composer install --no-interaction --prefer-dist --optimize-autoloader
 # cp server.php index.php
