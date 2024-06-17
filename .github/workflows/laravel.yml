@@ -13,16 +13,17 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@main
+
       
-    - name: Deploy to ssh server
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
-        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-        REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        TARGET: ${{ secrets.SSH_PROJECT_PATH }}
-        SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
+    # - name: Deploy to ssh server
+    #   uses: easingthemes/ssh-deploy@v2.1.5
+    #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    #     REMOTE_HOST: ${{ secrets.SSH_IP_ADDRESS }}
+    #     REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+    #     REMOTE_PORT: ${{ secrets.SSH_PORT }}
+    #     TARGET: ${{ secrets.SSH_PROJECT_PATH }}
+    #     SSH_CMD_ARGS : "-o StrictHostKeyChecking=no"
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
@@ -32,11 +33,9 @@ jobs:
         # password: ${{ secrets.SSH_PASSWORD }}
         port : ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script_stop: true
         script: |
             cd ${{ secrets.SSH_PROJECT_PATH }}
-            composer install
-            chmod 777 -R storage bootstrap
-            php artisan migrate
-            php artisan optimize
+            sh deploy.sh
             
   
