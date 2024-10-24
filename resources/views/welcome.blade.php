@@ -130,8 +130,8 @@
                             </svg>
 
                             <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Worked on Jignesh Prajapati - IPS
-                            </a>
+                                Worked on Jignesh Prajapati - IPS - ss
+                             </a>
                         </div>
                     </div>
 
