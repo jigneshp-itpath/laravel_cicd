@@ -63,8 +63,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "lint": [ 
-        "vendor/bin/phpstan analyse" 
-    ]
+    "prefer-stable": true
 }
